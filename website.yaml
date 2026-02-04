@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nextjs-app
   annotations:
-    keel.sh/policy: force # Tells the cluster to auto-update
+    keel.sh/policy: force # Tells the cluster to auto-update when Keel sees a new image
 spec:
   replicas: 2
   selector:
@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: nextjs
-        image: ghcr.io/YOUR_GITHUB_USER/YOUR_REPO:latest
+        # UPDATE THIS LINE to your lowercase GitHub info
+        image: ghcr.io/pouriyamehr/website-v4:latest 
         ports:
         - containerPort: 3000
 ---
@@ -28,5 +29,5 @@ spec:
   selector:
     app: nextjs
   ports:
-    - port: 80
-      targetPort: 3000
+    - port: 80        # The port your domain will hit
+      targetPort: 3000 # The port your Next.js app is listening on
